@@ -65,3 +65,17 @@ class Logout(APIView):
             return Response({"Message": "Logout Successfully", "status": 200})
         return Response({"Message": "User already logout"})
 
+
+
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_framework.permissions import AllowAny
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    permission_classes = (AllowAny,)
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter
+    permission_classes = (AllowAny,)
