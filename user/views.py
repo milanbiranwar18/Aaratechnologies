@@ -1,13 +1,12 @@
-# Create your views here.
-import json
 import logging
-from user.utils import SessionAuth, SessionAuthentication, JWT
+from user.utils import JWT
 from django.contrib.auth import logout, login
-from django.db import connection
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from rest_framework.permissions import AllowAny
 
 
 from user.serializer import RegistrationSerializer, LoginSerializer
@@ -66,15 +65,10 @@ class Logout(APIView):
         return Response({"Message": "User already logout"})
 
 
-
-from dj_rest_auth.registration.views import SocialLoginView
-from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
-from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-from rest_framework.permissions import AllowAny
-
 class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     permission_classes = (AllowAny,)
+
 
 class FacebookLogin(SocialLoginView):
     adapter_class = FacebookOAuth2Adapter

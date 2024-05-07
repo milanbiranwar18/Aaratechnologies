@@ -1,9 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-
 from user.utils import verify_token
-from .models import Shop, Review
+from .models import Shop
 from .serializers import ShopSerializer, ReviewSerializer
 
 
